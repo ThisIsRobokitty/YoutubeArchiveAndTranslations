@@ -1,0 +1,3 @@
+pip install google-api-python-client
+pip install --upgrade oauth2client
+DESKTOP U MORON
