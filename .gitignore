@@ -1,0 +1,13 @@
+*
+!*/
+
+# track this file
+!.gitignore
+!archive_script.py
+!autorestarter.bat
+!instructions.txt
+!upload_video.py
+!README.md
+
+# whitelist everything in ./config/
+!whisper_package/
