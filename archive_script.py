@@ -104,7 +104,7 @@ def sort_files(files):
 def translate_audio(audio_file, output_dir):
     #encoded_audio_file = audio_file.encode("utf-8")
     #encoded_output_dir = output_dir.encode("utf-8")
-    cmd = ["python", "-m", "whisper_package", audio_file, "--language", "Japanese", "--task",  "translate", "--output_dir", output_dir, "--output_format", "srt", "--model", "medium"]
+    cmd = ["python", "-m", "whisper.whisper", audio_file, "--language", "Japanese", "--task",  "translate", "--output_dir", output_dir, "--output_format", "srt", "--model", "medium"]
     result = subprocess.run(cmd, shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
     if result.returncode != 0:
         try:
