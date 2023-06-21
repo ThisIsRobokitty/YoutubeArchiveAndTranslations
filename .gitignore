@@ -3,11 +3,13 @@
 
 # track this file
 !.gitignore
+!.gitmodules
 !archive_script.py
 !autorestarter.bat
 !instructions.txt
 !upload_video.py
 !README.md
+!requirements.txt
 
 # whitelist everything in ./config/
-!whisper_package/
+#!whisper_package/
