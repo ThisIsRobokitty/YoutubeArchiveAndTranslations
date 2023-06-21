@@ -138,31 +138,34 @@ def main():
             for filename in sorted_files:
                 f.write(filename + '\n')
 
+        # cycle through list of files until complete 
+        for filename in sorted_files:
+
         #perform audio rip
-        for videoname in sorted_files:
-            video_file = os.path.join(folder_path, files[videoname].get("video", ""))
-            audio_file = os.path.join(audio_path, videoname + ".wav")
+        #for videoname in sorted_files:
+            video_file = os.path.join(folder_path, files[filename].get("video", ""))
+            audio_file = os.path.join(audio_path, filename + ".wav")
             if not os.path.exists(audio_file):
                 print("Ripping: " + video_file + ", " + datetime.now().strftime('%HH:%MM %m/%d/%Y'))
                 video = AudioSegment.from_file(video_file)
                 audio = video.set_channels(1) # change to mono
                 audio.export(audio_file, format="wav")
             else:
-                print("Audio exists, skipping: ", files[videoname].get("video", ""), ", " + datetime.now().strftime('%HH:%MM %m/%d/%Y'))
+                print("Audio exists, skipping: ", files[filename].get("video", ""), ", " + datetime.now().strftime('%HH:%MM %m/%d/%Y'))
 
         #do captioning from audio
-        for audioname in sorted_files:
-            audio_file = os.path.join(audio_path, audioname + ".wav")
-            caption_file = os.path.join(caption_path, audioname + ".wav" + ".srt")
+        #for audioname in sorted_files:
+            audio_file = os.path.join(audio_path, filename + ".wav")
+            caption_file = os.path.join(caption_path, filename + ".wav" + ".srt")
             caption_dir = os.path.join(caption_path)
             if not os.path.exists(caption_file):
-                print("Begun captioning: " + audioname + ", " + datetime.now().strftime('%HH:%MM %m/%d/%Y'))
+                print("Begun captioning: " + filename + ", " + datetime.now().strftime('%HH:%MM %m/%d/%Y'))
                 translate_audio(audio_file, caption_dir)
             else:
-                print("Caption exists, skipping:", audioname + ".srt")
+                print("Caption exists, skipping:", filename + ".srt")
 
 
-        for filename in sorted_files:
+        #for filename in sorted_files:
             video_file = os.path.join(folder_path, files[filename].get("video", ""))
             thumbnail_file = os.path.join(folder_path, files[filename].get("thumbnail", ""))
             description_file = os.path.join(folder_path, files[filename].get("description", ""))
