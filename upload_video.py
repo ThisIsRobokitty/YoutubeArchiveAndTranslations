@@ -108,9 +108,9 @@ def initialize_upload(youtube, options):
   )
 
   # Call the API's videos.insert method to create and upload the video.
-  #insert_request = youtube.videos().insert(
-   # part=",".join(body.keys()),
-    #body=body,
+  insert_request = youtube.videos().insert(
+    part=",".join(body.keys()),
+    body=body,
     # The chunksize parameter specifies the size of each chunk of data, in
     # bytes, that will be uploaded at a time. Set a higher value for
     # reliable connections as fewer chunks lead to faster uploads. Set a lower
@@ -122,10 +122,10 @@ def initialize_upload(youtube, options):
     # practice, but if you're using Python older than 2.6 or if you're
     # running on App Engine, you should set the chunksize to something like
     # 1024 * 1024 (1 megabyte).
-   # media_body=MediaFileUpload(options.file, chunksize=-1, resumable=True)
-  #)
+    media_body=MediaFileUpload(options.file, chunksize=-1, resumable=True)
+  )
 
-  #return response_body_with_resource = resumable_upload(insert_request)
+  response_body_with_resource = resumable_upload(insert_request)
 
   print("Setting captions..")
 
@@ -137,7 +137,7 @@ def initialize_upload(youtube, options):
       sync=False,
       body={
         "snippet": {
-          "videoId": "ykk91-hF844", #"videoId": response_body_with_resource["id"],
+          "videoId": response_body_with_resource["id"],
           "language": options.captions_lang,
           "name": options.captions_name
         }
@@ -150,7 +150,7 @@ def initialize_upload(youtube, options):
   # Add a thumbnail to the video, if specified.
   if options.thumbnail:
     youtube.thumbnails().set(
-      videoId="ykk91-hF844", #response_body_with_resource["id"],
+      videoId=response_body_with_resource["id"],
       media_body=MediaFileUpload(options.thumbnail)
     ).execute()
 
