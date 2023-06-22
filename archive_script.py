@@ -6,12 +6,8 @@ from PIL import Image
 from pydub import AudioSegment
 from datetime import datetime
 
-import whisper
 import warnings
 import numpy as np
-from whisper import utils
-from whisper.utils import get_writer
-from whisper import transcribe
 
 def run_batch_file(batch_file_path):
     status = subprocess.run(batch_file_path, shell=True)
@@ -80,7 +76,7 @@ def run_uploader_script(video_file, thumbnail_file, description_file, title, cap
         original_description = f.read()
 
     description = "Original video description: " + original_description
-    tags = "Utatane Nasa,phase-connect,archive,vtuber,dragon,phaseconnect"
+    tags = "Utatane Nasa,phase-connect,archive,vtuber,dragon,phaseconnect,AI,translation"
 
     return_value = subprocess.call(["python", "upload_video.py",
                      "--file=" + video_file,  
@@ -156,7 +152,7 @@ def main():
         #do captioning from audio
         #for audioname in sorted_files:
             audio_file = os.path.join(audio_path, filename + ".wav")
-            caption_file = os.path.join(caption_path, filename + ".wav" + ".srt")
+            caption_file = os.path.join(caption_path, filename + ".srt")
             caption_dir = os.path.join(caption_path)
             if not os.path.exists(caption_file):
                 print("Begun captioning: " + filename + ", " + datetime.now().strftime('%HH:%MM %m/%d/%Y'))
