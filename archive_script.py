@@ -157,6 +157,10 @@ def main():
             if not os.path.exists(caption_file):
                 print("Begun captioning: " + filename + ", " + datetime.now().strftime('%HH:%MM %m/%d/%Y'))
                 translate_audio(audio_file, caption_dir)
+                if not os.path.exists(caption_file):
+                    print("Captioning issue, " + datetime.now().strftime('%HH:%MM %m/%d/%Y'))
+                    error = 1
+                break
             else:
                 print("Caption exists, skipping:", filename + ".srt")
 
