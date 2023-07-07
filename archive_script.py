@@ -160,7 +160,7 @@ def main():
                 if not os.path.exists(caption_file):
                     print("Captioning issue, " + datetime.now().strftime('%HH:%MM %m/%d/%Y'))
                     error = 1
-                break
+                    break
             else:
                 print("Caption exists, skipping:", filename + ".srt")
 
